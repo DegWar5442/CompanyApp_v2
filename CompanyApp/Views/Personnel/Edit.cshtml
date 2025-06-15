@@ -1,0 +1,95 @@
+﻿@model CompanyApp.ViewModels.EmployeeEditViewModel
+
+@{
+	ViewData["Title"] = "Edit Employee";
+}
+
+<div class="container mx-auto px-4 py-6">
+	<h2 class="text-2xl font-bold mb-4">Edit Employee</h2>
+
+	<form asp-action="Edit" method="post" class="space-y-4">
+		<input type="hidden" asp-for="Id" />
+
+		<div>
+			<label asp-for="FirstName" class="block font-medium"></label>
+			<input asp-for="FirstName" class="border rounded w-full p-2" />
+			<span asp-validation-for="FirstName" class="text-red-500 text-sm"></span>
+		</div>
+
+		<div>
+			<label asp-for="LastName" class="block font-medium"></label>
+			<input asp-for="LastName" class="border rounded w-full p-2" />
+			<span asp-validation-for="LastName" class="text-red-500 text-sm"></span>
+		</div>
+
+		<div>
+			<label asp-for="MiddleName" class="block font-medium"></label>
+			<input asp-for="MiddleName" class="border rounded w-full p-2" />
+		</div>
+
+		<div>
+			<label asp-for="DateOfBirth" class="block font-medium"></label>
+			<input asp-for="DateOfBirth" type="date" class="border rounded w-full p-2" />
+		</div>
+
+		<div>
+			<label asp-for="HireDate" class="block font-medium"></label>
+			<input asp-for="HireDate" type="date" class="border rounded w-full p-2" />
+		</div>
+
+		<div>
+			<label asp-for="Salary" class="block font-medium"></label>
+			<input asp-for="Salary" class="border rounded w-full p-2" />
+		</div>
+
+		<div>
+			<label asp-for="PhoneNumber" class="block font-medium"></label>
+			<input asp-for="PhoneNumber" class="border rounded w-full p-2" />
+		</div>
+
+		<input type="hidden" asp-for="AddressDetails.Id" />
+
+		<div>
+			<label asp-for="AddressDetails.Street" class="block font-medium mb-1"></label>
+			<input asp-for="AddressDetails.Street" class="border rounded w-full p-2" />
+			<span asp-validation-for="AddressDetails.Street" class="text-red-500 text-sm"></span>
+		</div>
+
+		<div>
+			<label asp-for="AddressDetails.BuildingNumber" class="block font-medium mb-1"></label>
+			<input asp-for="AddressDetails.BuildingNumber" class="border rounded w-full p-2" />
+			<span asp-validation-for="AddressDetails.BuildingNumber" class="text-red-500 text-sm"></span>
+		</div>
+
+		<div>
+			<label asp-for="AddressDetails.ApartmentNumber" class="block font-medium mb-1"></label>
+			<input asp-for="AddressDetails.ApartmentNumber" class="border rounded w-full p-2" />
+			<span asp-validation-for="AddressDetails.ApartmentNumber" class="text-red-500 text-sm"></span>
+		</div>
+
+		<div>
+			<label asp-for="AddressDetails.CityId" class="block font-medium mb-1"></label>
+			<select asp-for="AddressDetails.CityId" asp-items="Model.Cities" class="border rounded w-full p-2">
+				<option value=""> Select City </option>
+			</select>
+			<span asp-validation-for="AddressDetails.CityId" class="text-red-500 text-sm"></span>
+		</div>
+
+		<div>
+			<label asp-for="DepartmentId" class="block font-medium"></label>
+			<select asp-for="DepartmentId" asp-items="Model.Departments" class="border rounded w-full p-2"></select>
+		</div>
+
+		<div>
+			<label asp-for="PositionId" class="block font-medium"></label>
+			<select asp-for="PositionId" asp-items="Model.Positions" class="border rounded w-full p-2"></select>
+		</div>
+
+		<button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Save</button>
+		<a asp-action="Index" class="ml-4 text-blue-600 hover:underline">Back</a>
+	</form>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

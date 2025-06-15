@@ -1,0 +1,52 @@
+﻿@model CompanyApp.ViewModels.PayrollReportViewModel
+
+@{
+    ViewData["Title"] = "Payroll Report";
+}
+
+<div class="container mx-auto px-4 py-6">
+    <h2 class="text-2xl font-bold mb-4">Payroll Report</h2>
+
+    <form method="get" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <select name="departmentId" asp-for="DepartmentId" class="border p-2 rounded-md w-full">
+            <option value="">All Departments</option>
+            @foreach (var dept in Model.Departments)
+            {
+                <option value="@dept.Value" selected="@(dept.Value == Model.DepartmentId?.ToString() ? "selected" : null)">@dept.Text</option>
+            }
+        </select>
+
+        <button type="submit" class="bg-blue-600 text-white rounded-md px-4 py-2">Generate</button>
+
+        <a asp-controller="PayrollReport" asp-action="ExportTxt" asp-route-departmentId="@Model.DepartmentId"
+           class="bg-green-600 text-white rounded-md px-4 py-2 text-center hover:bg-green-700 transition">
+            Export to TXT
+        </a>
+    </form>
+
+    <table class="table-auto w-full border border-gray-300 mb-6">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="text-left px-4 py-2 border">Full Name</th>
+                <th class="text-left px-4 py-2 border">Department</th>
+                <th class="text-left px-4 py-2 border">Position</th>
+                <th class="text-left px-4 py-2 border">Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in Model.Employees)
+            {
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-2 border">@emp.FullName</td>
+                    <td class="px-4 py-2 border">@emp.DepartmentName</td>
+                    <td class="px-4 py-2 border">@emp.PositionName</td>
+                    <td class="px-4 py-2 border">@emp.Salary.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-xl font-semibold">
+        Total Salary: <span class="text-green-700">@Model.TotalSalary.ToString("C")</span>
+    </div>
+</div>
